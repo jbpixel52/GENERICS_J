@@ -27,7 +27,7 @@ public class Main {
         System.out.println("UNSORTED: " + arr4);
         System.out.println("SORTED: " + merge(arr4));
         System.out.println("# QUICK SORT #");
-        Qsort(arr5);
+        System.out.println(quickSort(arr5));
         // Bubble, Select, Insert, Merge, Quicksort
     }
 
@@ -103,40 +103,41 @@ public class Main {
         return a;
     }
 
-    public static void Qsort(ArrayList<Elemento> arr) {
-        quickSort(arr, arr.size() / 2, arr.size() - 1);
+    public static ArrayList<Elemento> quickSort(ArrayList<Elemento> arr){
+        Helper(arr,0,arr.size()-1);
+        return arr;
     }
+    public static void  Helper(ArrayList<Elemento> arr,int first,int ending){
+        if (first < ending){
+            int splitpoint = partitioner(arr,first,ending);
 
-    public static void quickSort(ArrayList<Elemento> arr, int from, int to) {
-        if (from < to) {
-            int p = split(arr, from, to);
-            quickSort(arr, from, p);
-            quickSort(arr, p + 1, to);
+            Helper(arr,first,splitpoint-1);
+            Helper(arr,splitpoint+1,ending);
         }
-        System.out.println("SORTED: " + arr);
     }
+    public static int partitioner(ArrayList<Elemento> arr, int first, int ending){
+        Elemento pivot = arr.get(first);
 
-    public static int split(ArrayList<Elemento> arr, int from, int to) {
-        Elemento pivot = arr.get(from);
-        int i = from - 1;
-        int j = to + 1;
+        int left = first+1;
+        int right = ending;
 
-        while (i < j) {
-            i++;
-            while ((arr.get(i).get().compareTo(pivot.get()) < 0)) {
-                i++;
+        boolean done = false;
+        while (!done){
+
+            while (left <= right && arr.get(left).get().compareTo(pivot.get())<=0){
+                left = left + 1;
             }
-            j--;
-            while ((arr.get(i).get().compareTo(pivot.get()) > 0)) {
-                j--;
+            
+            while ((arr.get(right).get().compareTo(pivot.get())>=0)  && (right>=left)){
+                right = right -1;
             }
-            if (i < j) {
-                Elemento temp = arr.get(i);
-                arr.set(i, arr.get(j));
-                arr.set(j, temp);
-            }
+            if (right < left){
+                done = true;
+            }else
+                Collections.swap(arr, left,right);
         }
-        return j;
-    }
+        Collections.swap(arr, first, right);
 
+        return right;
+            }
 }
