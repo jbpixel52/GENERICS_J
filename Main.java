@@ -104,29 +104,32 @@ public class Main {
     }
 
     public static void Qsort(ArrayList<Elemento> arr) {
-        quickSort(arr, arr.size()/2, arr.size() - 1);
+        quickSort(arr, arr.size() / 2, arr.size() - 1);
     }
 
     public static void quickSort(ArrayList<Elemento> arr, int from, int to) {
         if (from < to) {
-            int p = partition(arr, from, to);
+            int p = split(arr, from, to);
             quickSort(arr, from, p);
             quickSort(arr, p + 1, to);
         }
         System.out.println("SORTED: " + arr);
     }
 
-    public static int partition(ArrayList<Elemento> arr, int from, int to) {
+    public static int split(ArrayList<Elemento> arr, int from, int to) {
         Elemento pivot = arr.get(from);
         int i = from - 1;
         int j = to + 1;
 
         while (i < j) {
             i++;
-            while ((arr.get(i).get().compareTo(pivot.get()) < 0)){i++;}
+            while ((arr.get(i).get().compareTo(pivot.get()) < 0)) {
+                i++;
+            }
             j--;
-            while ((arr.get(i).get().compareTo(pivot.get()) > 0)){j--;}
-                
+            while ((arr.get(i).get().compareTo(pivot.get()) > 0)) {
+                j--;
+            }
             if (i < j) {
                 Elemento temp = arr.get(i);
                 arr.set(i, arr.get(j));
