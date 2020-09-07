@@ -103,41 +103,43 @@ public class Main {
         return a;
     }
 
-    public static ArrayList<Elemento> quickSort(ArrayList<Elemento> arr){
-        Helper(arr,0,arr.size()-1);
+    public static ArrayList<Elemento> quickSort(ArrayList<Elemento> arr) {
+        Helper(arr, 0, arr.size() - 1);
         return arr;
     }
-    public static void  Helper(ArrayList<Elemento> arr,int first,int ending){
-        if (first < ending){
-            int splitpoint = partitioner(arr,first,ending);
 
-            Helper(arr,first,splitpoint-1);
-            Helper(arr,splitpoint+1,ending);
+    public static void Helper(ArrayList<Elemento> arr, int first, int ending) {
+        if (first < ending) {
+            int splitpoint = partitioner(arr, first, ending);
+
+            Helper(arr, first, splitpoint - 1);
+            Helper(arr, splitpoint + 1, ending);
         }
     }
-    public static int partitioner(ArrayList<Elemento> arr, int first, int ending){
+
+    public static int partitioner(ArrayList<Elemento> arr, int first, int ending) {
         Elemento pivot = arr.get(first);
 
-        int left = first+1;
+        int left = first + 1;
         int right = ending;
 
         boolean done = false;
-        while (!done){
+        while (!done) {
 
-            while (left <= right && arr.get(left).get().compareTo(pivot.get())<=0){
+            while (left <= right && arr.get(left).get().compareTo(pivot.get()) <= 0) {
                 left = left + 1;
             }
-            
-            while ((arr.get(right).get().compareTo(pivot.get())>=0)  && (right>=left)){
-                right = right -1;
+
+            while ((arr.get(right).get().compareTo(pivot.get()) >= 0) && (right >= left)) {
+                right = right - 1;
             }
-            if (right < left){
+            if (right < left) {
                 done = true;
-            }else
-                Collections.swap(arr, left,right);
+            } else
+                Collections.swap(arr, left, right);
         }
         Collections.swap(arr, first, right);
 
         return right;
-            }
+    }
 }
