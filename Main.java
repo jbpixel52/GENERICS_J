@@ -1,7 +1,8 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
-@SuppressWarnings("rawtypes")
+//@SuppressWarnings("rawtypes")
 public class Main {
     public static void main(String[] args) {
         // Elemento<Integer> e1= new Elemento();
@@ -14,6 +15,9 @@ public class Main {
         for (int i = 0; i < 8; i++) {
             Elemento x = new Elemento<>();
             x.set(i + (int) (Math.random() * 100));
+            //Random r = new Random();
+            //char c = (char)(r.nextInt(26) + 'a');
+            //x.set(c);
             arr.add(x);
             arr2.add(x);
             arr3.add(x);
@@ -27,7 +31,8 @@ public class Main {
         System.out.println("UNSORTED: " + arr4);
         System.out.println("SORTED: " + merge(arr4));
         System.out.println("# QUICK SORT #");
-        System.out.println(quickSort(arr5));
+        System.out.println("UNSORTED: "+ arr5);
+        System.out.println("SORTED: "+quickSort(arr5));
         // Bubble, Select, Insert, Merge, Quicksort
     }
 
